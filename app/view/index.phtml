@@ -1,0 +1,70 @@
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hackaton</title>
+    <link rel="preconnect" href="https://assets.exesfull.com">
+
+    <style>
+        .web_preview_loader {
+            font-family: Verdana, Geneva, sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .web_preview_loader_title {
+
+            border: 12px solid;
+            border-image: linear-gradient(to bottom right, #ff8a00 0%, #da1b60 100%) 1;
+            border-radius: 10%;
+        }
+    </style>
+</head>
+
+<body id="elemet_body">
+<div class="web_preview_loader" id="web_preview_loader_elemet">
+    <h1 class="web_preview_loader_title">Hachaton<br>2024<br>NONA </h1>
+</div>
+<script>
+    function loadVersionScript(callback){
+
+        var ScID = document.getElementById('webAppVersionScID');
+        if(ScID){
+            ScID.remove();
+        }
+        var script = document.createElement('script');
+        var currentDate = new Date();
+        script.id = 'webAppVersionScID';
+        script.src = window.webURLJsAssets + 'version.js?' + currentDate.getTime();
+        script.onload = callback;
+        document.head.appendChild(script);
+    }
+
+    function webUpdateMethod() {
+        var currentDate = new Date();
+        loadVersionScript(function () {
+            if (window.webVersion != window.webAppVersion) {
+                var MainScript = document.createElement('script');
+                MainScript.src = window.webURLJsAssets + 'main.js?' + currentDate.getTime();
+                document.head.appendChild(MainScript);
+                MainScript.onload = (() => {
+                    webCoreStartPage();
+                });
+                console.log('Обновление версии веба: c [' + window.webAppVersion + '] -> на [' + window.webVersion + ']');
+                webAppVersion = window.webVersion;
+
+            }
+        });
+    }
+
+    window.webAppVersion = 'Starting';
+    window.webURLJsAssets = 'https://assets.exesfull.com/projects/hackaton_web/';
+    window.webVersionUpdateCycle = setInterval(webUpdateMethod, 2000);
+    webUpdateMethod();
+</script>
+</body>
+
+</html>

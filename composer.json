@@ -32,7 +32,8 @@
     "triangle/session": "^1.0",
     "triangle/view": "^1.0",
     "triangle/events": "^1.0",
-    "triangle/http": "^1.0"
+    "triangle/http": "^1.0",
+    "mongodb/laravel-mongodb": "^5.1"
   },
   "suggest": {
     "ext-simplexml": "For XML Support",
